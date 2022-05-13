@@ -1,0 +1,33 @@
+{% extends "main.html" %}
+{% block body %}
+  <h1>Заголовок от наследующего шаблона</h1>
+  <p>{{ text }}</p>
+  <ul>
+    {% for num in numbers %}
+      <li>Число из цикла: {{ num|e }}</li>
+    {% endfor %}
+  </ul>
+  {# Комментарий #}
+  <p>Дата, отформатированная в python: {{ date_one|e }}</p>
+  <p>Дата, отформатированная в шаблоне: {{ date_two.strftime('%d/%m/%Y')|e }}</p>
+  <h1>Форма WTForms: </h1>
+  <form action="" method="post" >
+    <p>{{ form.email.label() }} {{ form.email() }}</p>
+    <p>{{ form.password.label() }} {{ form.password() }}</p>
+    <p>{{ form.remember.label() }} {{ form.remember() }}</p>
+    <p>{{ form.submit(disabled=True) }}</p>
+  </form>
+  <br>
+  <h1>Кастомный фильтр и условие if для проверки является ли число простым: </h1>
+  <form action="" method="post" >
+    <p>{{ formPrime.number.label() }} {{ formPrime.number() }}</p>
+    <p>{{ formPrime.submit() }}</p>
+  </form>
+  {% if number %}
+      {% if number|is_prime %}
+        <p style="color: green"><strong><a name="bottom">Prime</a></strong></p>
+      {% else %}
+        <p style="color: red"><strong><a name="bottom">Not prime</a></strong></p>
+      {% endif %}
+    {% endif %}
+  {% endblock %}
